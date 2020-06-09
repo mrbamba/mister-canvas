@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mister Canvas</title>
+    <link rel="stylesheet" href="style/style.css">
+</head>
+
+<body onload="init()">
+    <div class="header">
+        <h1>Mister Canvas!</h1>
+        <div class="options-selector">
+            <div class="stroke-color-selector selector">
+                <label for="favcolor">Stroke Color:</label>
+                <input type="color" id="favcolor" name="favcolor" value="#000" class="stroke-color-picker" onchange="onStrokeColorChange()">
+            </div>
+            <div class="fill-color-selector selector">
+                <label for="favcolor">Fill Color:</label>
+                <input type="color" id="favcolor" name="favcolor" value="#000" class="fill-color-picker" onchange="onFillColorChange()">
+                <span class="use-fill-question">Use Fill?</span>
+                <input type="checkbox" class="use-fill" checked="unchecked" onchange="onUseFillChange()">
+            </div>
+            <select name="shape-selector" id="shape-selector" class="shape-selector selector" onchange="onShapeChange()">
+                <option value="line">Line</option>
+                <option value="rectangle">rectangle</option>
+                <option value="triangle">Triangle</option>
+                <option value="circle">Circle</option>
+            </select>
+        </div>
+        <div class="canvas-container">
+            <canvas onclick="draw(event)" id="drawing" style="border: 1px solid black;"></canvas>
+        </div>
+        
+    </div>
+
+    <script src="js/canvas-controller.js"></script>
+</body>
+
+</html>

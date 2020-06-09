@@ -1,0 +1,36 @@
+*{
+    box-sizing: border-box;
+}
+
+/* BASE */
+
+
+body {
+    margin: 0 5%;
+    font-size: 1;
+    background-color: bisque;    
+}
+/* header */
+
+.header h1{
+    text-align: center;
+}
+
+.options-selector{
+    display: flex;
+    justify-content: center;
+}
+
+.selector{
+    margin: 1em;
+}
+
+.color-selector{
+    margin: .5em;
+}
+
+
+.canvas-container{
+    height: 500px;
+    background-color: #fff;    
+}
