@@ -1,16 +1,23 @@
 'use strict'
+
+//GLOBAL VARIABLES
 var gCtx;
-var gElCanvas
-var gCurrShape = 'line'
-var gUseFill = true
+var gElCanvas;
+var gCurrShape = 'line';
+var gUseFill = true;
+var gX;
+var gY;
+var gIsDrawing;
+const CANVAS=document.querySelector('.canvas-container');
 
-
+//BASE
 
 function init() {
     gElCanvas = document.getElementById('drawing');
     gCtx = gElCanvas.getContext('2d');
     gCtx.fillStyle = '#000';
     gCtx.strokeStyle = '#000'
+    gIsDrawing=false
     resizeCanvas();
 }
 
@@ -20,7 +27,7 @@ function resizeCanvas() {
     gElCanvas.height = elCanvasContainer.offsetHeight;
 }
 
-
+//SETTING CHANGES
 
 function onStrokeColorChange() {
     gCtx.strokeStyle = document.querySelector('.stroke-color-picker').value;
@@ -42,6 +49,29 @@ function onShapeChange() {
 
 }
 
+//CANVAS DRAWING
+//listeners
+CANVAS.addEventListener('mousedown', ev=>{
+    gX=ev.offsetX;
+    gY=ev.offsetY;
+    gIsDrawing=true;
+})
+
+CANVAS.addEventListener('mousemove',ev=>{
+    if(gIsDrawing)draw(ev)
+    gX=ev.offsetX;
+    gY=ev.offsetY;
+})
+
+window.addEventListener('mouseup',ev=>{
+    if (gIsDrawing){
+        draw(ev);
+        // gX=0;
+        // gY=0;
+        gIsDrawing=false;
+    }
+})
+//drawing
 function draw(ev) {
     console.log(ev)
     const { offsetX, offsetY } = ev;
@@ -64,8 +94,8 @@ function draw(ev) {
 
 function drawLine(x, y) {
     gCtx.beginPath();
-    gCtx.moveTo(x, y);
-    gCtx.lineTo(x + 100, y + 100)
+    gCtx.moveTo(gX, gY);
+    gCtx.lineTo(x, y)
     gCtx.closePath()
     gCtx.stroke();
 }
@@ -89,7 +119,7 @@ function drawTriangle(x, y) {
 
 function drawCircle(x, y) {
     gCtx.beginPath();
-    gCtx.lineWidth = '6';
+    gCtx.lineWidth = '1';
     gCtx.arc(x, y, 60, 0, 2 * Math.PI);
     gCtx.stroke();
     if (gUseFill)gCtx.fill()
